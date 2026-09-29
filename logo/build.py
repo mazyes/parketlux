@@ -21,33 +21,36 @@ def text_path(font_file, text, size, x, y, tracking=0.0):
     return pen.getCommands(), cx - tracking * size
 
 def mark(cx, cy):
-    """Rotary floor sander on a parquet strip: worn planks ahead, restored planks behind. Box 200x170."""
+    """Rotary floor sander on herringbone parquet: worn planks ahead, restored behind. Box 200x170."""
     floor = []
-    for i in range(-1, 10):
-        x = i * 24
-        col = BROWN if x + 10 < 64 else BEIGE
-        floor.append(f'<polygon fill="{col}" points="{x+8},152 {x+29},152 {x+21},170 {x},170"/>')
+    for i in range(-2, 12):
+        x, col = i * 18, (BROWN if i < 3 else BEIGE)
+        floor.append(f'<polygon fill="{col}" points="{x},159.25 {x+7.25},152 {x+23.5},152 {x+16.25},159.25"/>')
+        floor.append(f'<polygon fill="{col}" points="{x},160.75 {x+16.25},160.75 {x+23.5},168 {x+7.25},168"/>')
     return f'''<g transform="translate({cx-100},{cy-85})">
-  <clipPath id="floor"><rect x="0" y="152" width="200" height="18" rx="3"/></clipPath>
+  <clipPath id="floor"><rect x="4" y="152" width="192" height="16" rx="2"/></clipPath>
   <g clip-path="url(#floor)">{"".join(floor)}</g>
-  <path d="M78,44 C52,44 32,58 38,78 C41,88 46,92 50,96" fill="none" stroke="{BEIGE}" stroke-width="8" stroke-linecap="round"/>
-  <line x1="120" y1="118" x2="146" y2="30" stroke="{GREEN}" stroke-width="8" stroke-linecap="round"/>
-  <line x1="134" y1="26" x2="170" y2="18" stroke="{CHAR}" stroke-width="8" stroke-linecap="round"/>
-  <rect x="78" y="46" width="36" height="72" rx="5" fill="{BEIGE}"/>
-  <rect x="78" y="70" width="36" height="3" fill="#fff"/>
-  <rect x="78" y="94" width="36" height="3" fill="#fff"/>
-  <rect x="74" y="34" width="44" height="14" rx="5" fill="{CHAR}"/>
-  <rect x="40" y="92" width="34" height="28" rx="5" fill="{GREEN}"/>
-  <rect x="28" y="118" width="108" height="10" rx="3" fill="{GREEN}"/>
-  <rect x="22" y="128" width="120" height="18" rx="9" fill="{CHAR}"/>
-  <path d="M8,124 A30,30 0 0 0 8,150" fill="none" stroke="{GOLD}" stroke-width="4" stroke-linecap="round"/>
-  <path d="M-4,118 A40,40 0 0 0 -4,156" fill="none" stroke="{GOLD}" stroke-width="4" stroke-linecap="round" opacity=".55"/>
+  <path d="M77,41 C46,38 28,58 40,78 L50,90" fill="none" stroke="{BEIGE}" stroke-width="7" stroke-linecap="round"/>
+  <path d="M129,121 L151,30" fill="none" stroke="{GREEN}" stroke-width="7" stroke-linecap="round"/>
+  <path d="M112,74 H139" stroke="{GREEN}" stroke-width="5" stroke-linecap="round"/>
+  <path d="M143,28 L172,21" stroke="{CHAR}" stroke-width="9" stroke-linecap="round"/>
+  <rect x="81" y="46" width="34" height="72" rx="3" fill="{BEIGE}"/>
+  <path d="M81,68 H115 M81,90 H115" stroke="#fff" stroke-width="3"/>
+  <rect x="94" y="27" width="8" height="8" rx="2" fill="{CHAR}"/>
+  <rect x="76" y="33" width="44" height="15" rx="6" fill="{CHAR}"/>
+  <rect x="36" y="88" width="38" height="30" rx="6" fill="{GREEN}"/>
+  <path d="M44,98 H66 M44,104 H66 M44,110 H66" stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity=".85"/>
+  <path d="M30,126 L36,117 H130 L136,126 Z" fill="{GREEN}"/>
+  <path d="M22,134 A8,8 0 0 1 30,126 H136 A8,8 0 0 1 144,134 V138 A6,6 0 0 1 138,144 H28 A6,6 0 0 1 22,138 Z" fill="{CHAR}"/>
+  <rect x="28" y="145" width="110" height="3.5" rx="1.5" fill="{GOLD}"/>
+  <path d="M13,127 A26,26 0 0 0 13,149" fill="none" stroke="{GOLD}" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M3,121 A36,36 0 0 0 3,155" fill="none" stroke="{GOLD}" stroke-width="3.5" stroke-linecap="round" opacity=".45"/>
 </g>'''
 
 def svg(w, h, body):
     return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">\n<rect width="{w}" height="{h}" fill="#fff"/>\n{body}\n</svg>\n'
 
-M7, M5, G6 = f"{FONTS}/mont700.ttf", f"{FONTS}/mont500.ttf", f"{FONTS}/geo600.ttf"
+M7, G6, T5 = f"{FONTS}/fira800.woff", f"{FONTS}/fira600.woff", f"{FONTS}/fira500.woff"
 
 # Horizontal lockup
 parket, pw = text_path(M7, "PARKET", 64, 0, 0, 0.06)
@@ -55,7 +58,7 @@ lux, lw = text_path(M7, "LUX", 64, 0, 0, 0.06)
 geo, gw = text_path(G6, "პარკეტ ლუქსი", 25, 0, 0, 0.12)
 gap = 20
 tw = pw + gap + lw
-tag, tgw = text_path(G6, "პარკეტის ხეხვა და აღდგენა", 16, 0, 0, 0.1)
+tag, tgw = text_path(T5, "პარკეტის ხეხვა და აღდგენა", 16, 0, 0, 0.1)
 tx, W, H = 290, 290 + tw + 60, 260
 body = mark(150, 130)
 body += f'<path fill="{CHAR}" transform="translate({tx},128)" d="{parket}"/>'
@@ -70,7 +73,7 @@ S = 600
 parket, pw = text_path(M7, "PARKET", 58, 0, 0, 0.06)
 lux, lw = text_path(M7, "LUX", 58, 0, 0, 0.06)
 geo, gw = text_path(G6, "პარკეტ ლუქსი", 24, 0, 0, 0.12)
-tag, tgw = text_path(G6, "პარკეტის ხეხვა და აღდგენა", 16, 0, 0, 0.1)
+tag, tgw = text_path(T5, "პარკეტის ხეხვა და აღდგენა", 16, 0, 0, 0.1)
 tw = pw + 18 + lw
 tx = (S - tw) / 2
 body = mark(S / 2, 196)

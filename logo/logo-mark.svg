@@ -1,19 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
 <rect width="240" height="240" fill="#fff"/>
 <g transform="translate(20,35)">
-  <clipPath id="floor"><rect x="0" y="152" width="200" height="18" rx="3"/></clipPath>
-  <g clip-path="url(#floor)"><polygon fill="#5B3820" points="-16,152 5,152 -3,170 -24,170"/><polygon fill="#5B3820" points="8,152 29,152 21,170 0,170"/><polygon fill="#5B3820" points="32,152 53,152 45,170 24,170"/><polygon fill="#5B3820" points="56,152 77,152 69,170 48,170"/><polygon fill="#CDAE84" points="80,152 101,152 93,170 72,170"/><polygon fill="#CDAE84" points="104,152 125,152 117,170 96,170"/><polygon fill="#CDAE84" points="128,152 149,152 141,170 120,170"/><polygon fill="#CDAE84" points="152,152 173,152 165,170 144,170"/><polygon fill="#CDAE84" points="176,152 197,152 189,170 168,170"/><polygon fill="#CDAE84" points="200,152 221,152 213,170 192,170"/><polygon fill="#CDAE84" points="224,152 245,152 237,170 216,170"/></g>
-  <path d="M78,44 C52,44 32,58 38,78 C41,88 46,92 50,96" fill="none" stroke="#CDAE84" stroke-width="8" stroke-linecap="round"/>
-  <line x1="120" y1="118" x2="146" y2="30" stroke="#2E6B45" stroke-width="8" stroke-linecap="round"/>
-  <line x1="134" y1="26" x2="170" y2="18" stroke="#26221F" stroke-width="8" stroke-linecap="round"/>
-  <rect x="78" y="46" width="36" height="72" rx="5" fill="#CDAE84"/>
-  <rect x="78" y="70" width="36" height="3" fill="#fff"/>
-  <rect x="78" y="94" width="36" height="3" fill="#fff"/>
-  <rect x="74" y="34" width="44" height="14" rx="5" fill="#26221F"/>
-  <rect x="40" y="92" width="34" height="28" rx="5" fill="#2E6B45"/>
-  <rect x="28" y="118" width="108" height="10" rx="3" fill="#2E6B45"/>
-  <rect x="22" y="128" width="120" height="18" rx="9" fill="#26221F"/>
-  <path d="M8,124 A30,30 0 0 0 8,150" fill="none" stroke="#B8923E" stroke-width="4" stroke-linecap="round"/>
-  <path d="M-4,118 A40,40 0 0 0 -4,156" fill="none" stroke="#B8923E" stroke-width="4" stroke-linecap="round" opacity=".55"/>
+  <clipPath id="floor"><rect x="4" y="152" width="192" height="16" rx="2"/></clipPath>
+  <g clip-path="url(#floor)"><polygon fill="#5B3820" points="-36,159.25 -28.75,152 -12.5,152 -19.75,159.25"/><polygon fill="#5B3820" points="-36,160.75 -19.75,160.75 -12.5,168 -28.75,168"/><polygon fill="#5B3820" points="-18,159.25 -10.75,152 5.5,152 -1.75,159.25"/><polygon fill="#5B3820" points="-18,160.75 -1.75,160.75 5.5,168 -10.75,168"/><polygon fill="#5B3820" points="0,159.25 7.25,152 23.5,152 16.25,159.25"/><polygon fill="#5B3820" points="0,160.75 16.25,160.75 23.5,168 7.25,168"/><polygon fill="#5B3820" points="18,159.25 25.25,152 41.5,152 34.25,159.25"/><polygon fill="#5B3820" points="18,160.75 34.25,160.75 41.5,168 25.25,168"/><polygon fill="#5B3820" points="36,159.25 43.25,152 59.5,152 52.25,159.25"/><polygon fill="#5B3820" points="36,160.75 52.25,160.75 59.5,168 43.25,168"/><polygon fill="#CDAE84" points="54,159.25 61.25,152 77.5,152 70.25,159.25"/><polygon fill="#CDAE84" points="54,160.75 70.25,160.75 77.5,168 61.25,168"/><polygon fill="#CDAE84" points="72,159.25 79.25,152 95.5,152 88.25,159.25"/><polygon fill="#CDAE84" points="72,160.75 88.25,160.75 95.5,168 79.25,168"/><polygon fill="#CDAE84" points="90,159.25 97.25,152 113.5,152 106.25,159.25"/><polygon fill="#CDAE84" points="90,160.75 106.25,160.75 113.5,168 97.25,168"/><polygon fill="#CDAE84" points="108,159.25 115.25,152 131.5,152 124.25,159.25"/><polygon fill="#CDAE84" points="108,160.75 124.25,160.75 131.5,168 115.25,168"/><polygon fill="#CDAE84" points="126,159.25 133.25,152 149.5,152 142.25,159.25"/><polygon fill="#CDAE84" points="126,160.75 142.25,160.75 149.5,168 133.25,168"/><polygon fill="#CDAE84" points="144,159.25 151.25,152 167.5,152 160.25,159.25"/><polygon fill="#CDAE84" points="144,160.75 160.25,160.75 167.5,168 151.25,168"/><polygon fill="#CDAE84" points="162,159.25 169.25,152 185.5,152 178.25,159.25"/><polygon fill="#CDAE84" points="162,160.75 178.25,160.75 185.5,168 169.25,168"/><polygon fill="#CDAE84" points="180,159.25 187.25,152 203.5,152 196.25,159.25"/><polygon fill="#CDAE84" points="180,160.75 196.25,160.75 203.5,168 187.25,168"/><polygon fill="#CDAE84" points="198,159.25 205.25,152 221.5,152 214.25,159.25"/><polygon fill="#CDAE84" points="198,160.75 214.25,160.75 221.5,168 205.25,168"/></g>
+  <path d="M77,41 C46,38 28,58 40,78 L50,90" fill="none" stroke="#CDAE84" stroke-width="7" stroke-linecap="round"/>
+  <path d="M129,121 L151,30" fill="none" stroke="#2E6B45" stroke-width="7" stroke-linecap="round"/>
+  <path d="M112,74 H139" stroke="#2E6B45" stroke-width="5" stroke-linecap="round"/>
+  <path d="M143,28 L172,21" stroke="#26221F" stroke-width="9" stroke-linecap="round"/>
+  <rect x="81" y="46" width="34" height="72" rx="3" fill="#CDAE84"/>
+  <path d="M81,68 H115 M81,90 H115" stroke="#fff" stroke-width="3"/>
+  <rect x="94" y="27" width="8" height="8" rx="2" fill="#26221F"/>
+  <rect x="76" y="33" width="44" height="15" rx="6" fill="#26221F"/>
+  <rect x="36" y="88" width="38" height="30" rx="6" fill="#2E6B45"/>
+  <path d="M44,98 H66 M44,104 H66 M44,110 H66" stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity=".85"/>
+  <path d="M30,126 L36,117 H130 L136,126 Z" fill="#2E6B45"/>
+  <path d="M22,134 A8,8 0 0 1 30,126 H136 A8,8 0 0 1 144,134 V138 A6,6 0 0 1 138,144 H28 A6,6 0 0 1 22,138 Z" fill="#26221F"/>
+  <rect x="28" y="145" width="110" height="3.5" rx="1.5" fill="#B8923E"/>
+  <path d="M13,127 A26,26 0 0 0 13,149" fill="none" stroke="#B8923E" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M3,121 A36,36 0 0 0 3,155" fill="none" stroke="#B8923E" stroke-width="3.5" stroke-linecap="round" opacity=".45"/>
 </g>
 </svg>
