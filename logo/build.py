@@ -11,6 +11,7 @@ from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.pens.transformPen import TransformPen
 
 FONTS = sys.argv[1] if len(sys.argv) > 1 else "."
+INK = "#FFFFFF"
 BG, WHITE, SILVER, STEEL, TAN = "#0B0B0B", "#FFFFFF", "#C3C8CC", "#6B7378", "#D8B47A"
 GREEN, DGREEN = "#1E8A42", "#14602D"
 YELLOW, DYELLOW, WOOD = "#F5C400", "#C99A00", "#E8D3A2"
@@ -131,29 +132,31 @@ def wordmark(x, y, size, rule_above=False):
         y2 = y1 + size * 0.28
         y3 = y2 + size * 0.2 + size * 0.62
     y4 = y3 + size * 0.5
-    out = f'<path fill="{WHITE}" transform="translate({x:.2f},{y1:.2f})" d="{parket}"/>'
+    out = f'<path fill="{INK}" transform="translate({x:.2f},{y1:.2f})" d="{parket}"/>'
     out += f'<path fill="{GREEN}" transform="translate({x+pw+gap:.2f},{y1:.2f})" d="{lux}"/>'
     out += f'<rect x="{x:.2f}" y="{y2:.2f}" width="{tw:.2f}" height="{size*0.045:.2f}" fill="{YELLOW}"/>'
-    out += f'<path fill="{WHITE}" transform="translate({x:.2f},{y3:.2f})" d="{geo1}"/>'
+    out += f'<path fill="{INK}" transform="translate({x:.2f},{y3:.2f})" d="{geo1}"/>'
     out += f'<path fill="{GREEN}" transform="translate({x+g2x:.2f},{y3:.2f})" d="{geo2}"/>'
-    out += f'<path fill="{WHITE}" transform="translate({x:.2f},{y4:.2f})" d="{tag}"/>'
+    out += f'<path fill="{INK}" transform="translate({x:.2f},{y4:.2f})" d="{tag}"/>'
     return out, tw, y4 - y
 
 
-# Horizontal lockup
-_, tw, th = wordmark(0, 0, 64)
-H = 330
-body, tw, th = wordmark(260, (H - th) / 2 - 4, 64)
-body = mark(130, H / 2) + body
-open("logo-horizontal.svg", "w").write(svg(round(260 + tw + 60), H, body))
+# Black (default) and white-background variants
+for sfx, BG, INK in (("", "#0B0B0B", "#FFFFFF"), ("-white", "#FFFFFF", "#1C1C1C")):
+    # Horizontal lockup
+    _, tw, th = wordmark(0, 0, 64)
+    H = 330
+    body, tw, th = wordmark(260, (H - th) / 2 - 4, 64)
+    body = mark(130, H / 2) + body
+    open(f"logo-horizontal{sfx}.svg", "w").write(svg(round(260 + tw + 60), H, body))
 
-# Stacked / square (profile picture)
-S = 600
-_, tw, th = wordmark(0, 0, 58, True)
-top = (S - (245 + 20 + th)) / 2
-body = mark(S / 2, top + 122)
-wm, tw, th = wordmark((S - tw) / 2, top + 265, 58, True)
-open("logo-stacked.svg", "w").write(svg(S, S, body + wm))
+    # Stacked / square (profile picture)
+    S = 600
+    _, tw, th = wordmark(0, 0, 58, True)
+    top = (S - (245 + 20 + th)) / 2
+    body = mark(S / 2, top + 122)
+    wm, tw, th = wordmark((S - tw) / 2, top + 265, 58, True)
+    open(f"logo-stacked{sfx}.svg", "w").write(svg(S, S, body + wm))
 
-# Symbol only
-open("logo-mark.svg", "w").write(svg(280, 280, mark(140, 140)))
+    # Symbol only
+    open(f"logo-mark{sfx}.svg", "w").write(svg(280, 280, mark(140, 140)))
