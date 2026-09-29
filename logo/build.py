@@ -14,6 +14,7 @@ FONTS = sys.argv[1] if len(sys.argv) > 1 else "."
 BG, WHITE, SILVER, STEEL, TAN = "#0B0B0B", "#FFFFFF", "#C3C8CC", "#6B7378", "#D8B47A"
 GREEN, DGREEN = "#1E8A42", "#14602D"
 YELLOW, DYELLOW, WOOD = "#F5C400", "#C99A00", "#E8D3A2"
+OAK, WALNUT = "#C8965C", "#94623A"
 
 
 def mtavruli(s):
@@ -38,14 +39,14 @@ def fit_path(font_file, text, width, tracking=0.0):
     return text_path(font_file, text, 100 * width / w, tracking)
 
 
-def mark(cx, cy, R=70):
+def mark(cx, cy, R=80):
     """Parquet cube (three-rhombus pattern) with the rotary floor sander standing on its top face."""
     k = math.sqrt(3) / 2
     T, UR, LR, B, LL, UL, C = (0, -R), (k*R, -R/2), (k*R, R/2), (0, R), (-k*R, R/2), (-k*R, -R/2), (0, 0)
     def lerp(a, b, t): return (a[0] + (b[0]-a[0])*t, a[1] + (b[1]-a[1])*t)
     def pts(*ps): return " ".join(f"{x:.2f},{y:.2f}" for x, y in ps)
     out = []
-    for (p0, p1, p2, p3), col in (((UL, T, UR, C), WOOD), ((C, UR, LR, B), DGREEN), ((LL, UL, C, B), GREEN)):
+    for (p0, p1, p2, p3), col in (((UL, T, UR, C), WOOD), ((C, UR, LR, B), WALNUT), ((LL, UL, C, B), OAK)):
         out.append(f'<polygon fill="{col}" stroke="{BG}" stroke-width="4" stroke-linejoin="round" points="{pts(p0, p1, p2, p3)}"/>')
         for t in (1/4, 2/4, 3/4):
             a, b = lerp(p0, p3, t), lerp(p1, p2, t)
@@ -70,7 +71,7 @@ def mark(cx, cy, R=70):
   <circle cx="-24" cy="-62" r="7" fill="{GREEN}"/>
   <rect x="-33" y="-54" width="8" height="8" rx="1" fill="{WHITE}"/>
   <path d="M-14,-47 H26" stroke="{GREEN}" stroke-width="4.5" stroke-linecap="round"/></g>''')
-    return f'<g transform="translate({cx},{cy+47})">' + "".join(out) + '</g>'
+    return f'<g transform="translate({cx},{cy+43})">' + "".join(out) + '</g>'
 
 
 def svg(w, h, body):
@@ -104,7 +105,7 @@ def wordmark(x, y, size):
 
 # Horizontal lockup
 _, tw, th = wordmark(0, 0, 64)
-H = 320
+H = 330
 body, tw, th = wordmark(260, (H - th) / 2 - 4, 64)
 body = mark(130, H / 2) + body
 open("logo-horizontal.svg", "w").write(svg(round(260 + tw + 60), H, body))
@@ -112,9 +113,9 @@ open("logo-horizontal.svg", "w").write(svg(round(260 + tw + 60), H, body))
 # Stacked / square (profile picture)
 S = 600
 _, tw, th = wordmark(0, 0, 58)
-top = (S - (234 + 36 + th)) / 2
-body = mark(S / 2, top + 117)
-wm, tw, th = wordmark((S - tw) / 2, top + 270, 58)
+top = (S - (245 + 36 + th)) / 2
+body = mark(S / 2, top + 122)
+wm, tw, th = wordmark((S - tw) / 2, top + 281, 58)
 open("logo-stacked.svg", "w").write(svg(S, S, body + wm))
 
 # Symbol only
