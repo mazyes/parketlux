@@ -160,3 +160,14 @@ for sfx, BG, INK in (("", "#0B0B0B", "#FFFFFF"), ("-white", "#FFFFFF", "#1C1C1C"
 
     # Symbol only
     open(f"logo-mark{sfx}.svg", "w").write(svg(280, 280, mark(140, 140)))
+
+    # Facebook profile picture (1080x1080, content kept inside the circular crop)
+    k = 0.95 * 1080 / S
+    open(f"facebook-profile{sfx}.svg", "w").write(svg(1080, 1080, f'<g transform="translate({(1080 - S*k)/2:.2f},{(1080 - S*k)/2:.2f}) scale({k:.4f})">{body + wm}</g>'))
+
+    # Facebook cover (1640x624, horizontal lockup centered in the mobile-safe area)
+    _, tw, th = wordmark(0, 0, 64)
+    hw, hk = 260 + tw + 60, 1.5
+    hbody, _, _ = wordmark(260, (H - th) / 2 - 4, 64)
+    hbody = mark(130, H / 2) + hbody
+    open(f"facebook-cover{sfx}.svg", "w").write(svg(1640, 624, f'<g transform="translate({(1640 - hw*hk)/2 + 10:.2f},{(624 - H*hk)/2:.2f}) scale({hk})">{hbody}</g>'))
