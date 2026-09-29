@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont, ImageOps, ImageFilter
-IMG = "../images/"
-GEO = "geo-ExtraBold.ttf"; LAT = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+IMG = "/tmp/claude-0/-home-user-parketlux/3dae1b5d-5995-507d-954b-d138356c4e52/images/"
+GEO = "/tmp/claude-0/-home-user-parketlux/3dae1b5d-5995-507d-954b-d138356c4e52/scratchpad/geo-ExtraBold.ttf"; LAT = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 GREEN, DGREEN, GOLD, LGOLD = (20,96,45), (11,62,28), (212,160,23), (245,208,90)
 
 def cover(im, w, h):
@@ -20,12 +20,12 @@ def gradient(w, h, a, b):
         t = y / h; d.line((0, y, w, y), fill=tuple(int(a[i]*(1-t)+b[i]*t) for i in range(3)))
     return g
 
-def before_after(bf, af, out):
+def before_after(bf, af, out, title="პარკეტის ციკლოვკა და ლაქირება"):
     W, H, HD, FT = 1600, 1200, 150, 110
     c = Image.new("RGB", (W, H)); c.paste(gradient(W, H, GREEN, DGREEN))
     d = ImageDraw.Draw(c)
     bg = badge(120); c.paste(bg, (30, 15), bg)
-    ctext(d, W/2 + 40, 28, "პარკეტის ციკლოვკა და ლაქირება", ImageFont.truetype(GEO, 58), LGOLD)
+    ctext(d, W/2 + 40, 28, title, ImageFont.truetype(GEO, 58), LGOLD)
     d.line((180, HD - 12, W - 40, HD - 12), fill=GOLD, width=4)
     pw, ph, gap = 740, H - HD - FT - 20, 40
     x0 = (W - 2*pw - gap) // 2
@@ -50,6 +50,9 @@ def cover_photo(src, out):
     d.text((282, H - 70), "PARKET LUX  •  +995 558 61 11 62", font=ImageFont.truetype(LAT, 40), fill=(255, 255, 255))
     c.save(out, quality=90)
 
-before_after("3.jpg", "2.jpg", "before-after-1.jpg")
-before_after("4.webp", "5.jpg", "before-after-2.jpg")
-cover_photo("5.jpg", "cover.jpg")
+if __name__ == "__main__":
+    before_after("3.jpg", "2.jpg", "before-after-1.jpg")
+    before_after("4.webp", "5.jpg", "before-after-2.jpg")
+    cover_photo("5.jpg", "cover.jpg")
+    before_after("6.webp", "7.webp", "before-after-3.jpg", "მხატვრული პარკეტის ციკლოვკა")
+    before_after("8.webp", "9.webp", "before-after-4.jpg", "ფიცრის იატაკის ციკლოვკა და ლაქირება")
