@@ -51,26 +51,48 @@ def mark(cx, cy, R=80):
         for t in (1/4, 2/4, 3/4):
             a, b = lerp(p0, p3, t), lerp(p1, p2, t)
             out.append(f'<line x1="{a[0]:.2f}" y1="{a[1]:.2f}" x2="{b[0]:.2f}" y2="{b[1]:.2f}" stroke="{BG}" stroke-width="2"/>')
-    hose = "M-8,-101 C-44,-104 -50,-70 -30,-50"
+    hose = "M-11,-99 C-44,-102 -50,-70 -30,-52"
+    HL, DG, DARK = "#FFE36B", "#146A30", "#2B2F33"
     out.append(f'''<g transform="translate(0,-40) scale(1.3) translate(0,40)">
-  <path d="M26,-44 L35,-114" stroke="{GREEN}" stroke-width="5" stroke-linecap="round"/>
+  <path d="M26,-46 L35,-113" stroke="{GREEN}" stroke-width="5" stroke-linecap="round"/>
+  <path d="M27.5,-50 L31,-76" stroke="{DG}" stroke-width="1.2" stroke-linecap="round"/>
   <rect x="18" y="-127" width="36" height="12" rx="6" fill="none" stroke="{SILVER}" stroke-width="4.5"/>
-  <path d="M-24,-60 C-8,-86 12,-104 33,-104 C42,-104 46,-108 47,-115" fill="none" stroke="{YELLOW}" stroke-width="1.6" stroke-linecap="round"/>
-  <path d="M-36,-40 V-33 A36,18 0 0 0 36,-33 V-40 Z" fill="{DYELLOW}"/>
+  <path d="M40,-127 H48 M40,-115 H48" stroke="{STEEL}" stroke-width="4.5"/>
+  <rect x="31.5" y="-118" width="7" height="6" rx="1.5" fill="{GREEN}"/>
+  <path d="M-24,-66 C-10,-90 8,-92 29,-84" fill="none" stroke="{YELLOW}" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M33,-88 C44,-96 46,-106 44,-113" fill="none" stroke="{YELLOW}" stroke-width="1.5" stroke-linecap="round"/>
+  <rect x="27" y="-91" width="9" height="9" rx="2" fill="{YELLOW}" transform="rotate(8 31.5 -86.5)"/>
+  <path d="M-36,-36 V-31 A36,18 0 0 0 36,-31 V-36 Z" fill="{DARK}"/>
+  <path d="M-36,-40 V-35 A36,18 0 0 0 36,-35 V-40 Z" fill="{DYELLOW}"/>
   <ellipse cx="0" cy="-40" rx="36" ry="18" fill="{YELLOW}"/>
-  <ellipse cx="0" cy="-40" rx="36" ry="18" fill="none" stroke="{BG}" stroke-width="1.2" opacity=".35"/>
+  <path d="M-30,-31 A36,18 0 0 0 30,-31" fill="none" stroke="{HL}" stroke-width="1.4" stroke-linecap="round"/>
+  <circle cx="-22" cy="-30" r="1.4" fill="{DARK}"/><circle cx="22" cy="-30" r="1.4" fill="{DARK}"/>
   <path d="{hose}" fill="none" stroke="{TAN}" stroke-width="6.5" stroke-linecap="round"/>
-  <path d="{hose}" fill="none" stroke="#A9854C" stroke-width="6.5" stroke-dasharray="1.4 2.6"/>
-  <rect x="-9" y="-68" width="24" height="24" rx="2" fill="{STEEL}"/>
-  <rect x="-9" y="-94" width="24" height="27" rx="2" fill="{SILVER}"/>
-  <path d="M-5,-94 V-67 M-1,-94 V-67 M3,-94 V-67 M7,-94 V-67 M11,-94 V-67" stroke="#9AA1A6" stroke-width="1"/>
-  <rect x="-9" y="-68" width="24" height="2.5" fill="{YELLOW}"/>
-  <path d="M-11,-94 V-102 Q-11,-110 3,-110 Q17,-110 17,-102 V-94 Z" fill="{YELLOW}"/>
-  <rect x="0" y="-115" width="6" height="6" rx="1.5" fill="{SILVER}"/>
-  <rect x="-36" y="-58" width="24" height="16" rx="3" fill="{GREEN}"/>
-  <circle cx="-24" cy="-62" r="7" fill="{GREEN}"/>
-  <rect x="-33" y="-54" width="8" height="8" rx="1" fill="{WHITE}"/>
-  <path d="M-14,-47 H26" stroke="{GREEN}" stroke-width="4.5" stroke-linecap="round"/></g>''')
+  <path d="{hose}" fill="none" stroke="#A9854C" stroke-width="6.5" stroke-dasharray="1.2 2.4"/>
+  <rect x="-15" y="-103" width="6" height="8" rx="1.5" fill="{DARK}"/>
+  <rect x="-34" y="-54" width="8" height="6" rx="1.5" fill="{DARK}" transform="rotate(35 -30 -51)"/>
+  <rect x="-10" y="-50" width="26" height="6" rx="2" fill="{GREEN}"/>
+  <rect x="-9" y="-68" width="24" height="20" rx="2" fill="{STEEL}"/>
+  <rect x="-6" y="-66" width="3" height="16" rx="1.5" fill="#8C959B"/>
+  <rect x="-10" y="-70" width="26" height="3.5" rx="1" fill="{YELLOW}"/>
+  <rect x="-9" y="-94" width="24" height="24" rx="1.5" fill="{SILVER}"/>
+  <path d="M-5.5,-94 V-70 M-2,-94 V-70 M1.5,-94 V-70 M5,-94 V-70 M8.5,-94 V-70 M12,-94 V-70" stroke="#9AA1A6" stroke-width=".9"/>
+  <path d="M-9,-82 H15" stroke="#9AA1A6" stroke-width="1.6"/>
+  <path d="M-11,-94 V-101 Q-11,-110 3,-110 Q17,-110 17,-101 V-94 Z" fill="{YELLOW}"/>
+  <rect x="-11" y="-97" width="28" height="3" fill="{DYELLOW}"/>
+  <path d="M-6,-104 Q-4,-108 3,-108" fill="none" stroke="{HL}" stroke-width="1.4" stroke-linecap="round"/>
+  <rect x="1" y="-116" width="4" height="7" rx="1" fill="{SILVER}"/>
+  <rect x="-1" y="-117" width="8" height="2.5" rx="1" fill="{SILVER}"/>
+  <path d="M-12,-47 H26" stroke="{GREEN}" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M20,-47 L27,-58" stroke="{GREEN}" stroke-width="3" stroke-linecap="round"/>
+  <rect x="-38" y="-58" width="24" height="15" rx="2.5" fill="{GREEN}"/>
+  <rect x="-35.5" y="-55.5" width="9" height="8" rx="1" fill="{WHITE}" stroke="{DARK}" stroke-width="1.2"/>
+  <path d="M-34,-50 L-29.5,-53.5" stroke="{DARK}" stroke-width=".9" stroke-linecap="round"/>
+  <circle cx="-21" cy="-53" r="1.6" fill="{YELLOW}"/><circle cx="-17" cy="-53" r="1.6" fill="{DARK}"/>
+  <rect x="-37" y="-72" width="22" height="14" rx="6" fill="{GREEN}"/>
+  <path d="M-31,-71 V-59 M-27,-71 V-59 M-23,-71 V-59 M-19,-71 V-59" stroke="{DG}" stroke-width="1.3"/>
+  <circle cx="-15" cy="-65" r="4.5" fill="{DG}"/>
+  <circle cx="-15" cy="-65" r="1.6" fill="{SILVER}"/></g>''')
     return f'<g transform="translate({cx},{cy+43})">' + "".join(out) + '</g>'
 
 
@@ -119,4 +141,4 @@ wm, tw, th = wordmark((S - tw) / 2, top + 281, 58)
 open("logo-stacked.svg", "w").write(svg(S, S, body + wm))
 
 # Symbol only
-open("logo-mark.svg", "w").write(svg(240, 240, mark(120, 120)))
+open("logo-mark.svg", "w").write(svg(280, 280, mark(140, 140)))
