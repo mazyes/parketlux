@@ -115,7 +115,11 @@ def wordmark(x, y, size, rule_above=False):
     lux, lw = text_path(LAT, "LUX", size, 0.05)
     gap = size * 0.3
     tw = pw + gap + lw
-    geo, _ = fit_path(GEO_B, NAME_KA, tw, 0.06)
+    gsz = 100 * tw / text_path(GEO_B, NAME_KA, 100, 0.06)[1]
+    w1, w2 = NAME_KA.split(" ")
+    geo1, _ = text_path(GEO_B, w1, gsz, 0.06)
+    geo2, g2w = text_path(GEO_B, w2, gsz, 0.06)
+    g2x = tw - g2w
     tag, _ = fit_path(GEO_M, TAG_KA, tw, 0.12)
     cap = size * 0.7
     if rule_above:
@@ -130,7 +134,8 @@ def wordmark(x, y, size, rule_above=False):
     out = f'<path fill="{WHITE}" transform="translate({x:.2f},{y1:.2f})" d="{parket}"/>'
     out += f'<path fill="{GREEN}" transform="translate({x+pw+gap:.2f},{y1:.2f})" d="{lux}"/>'
     out += f'<rect x="{x:.2f}" y="{y2:.2f}" width="{tw:.2f}" height="{size*0.045:.2f}" fill="{YELLOW}"/>'
-    out += f'<path fill="{YELLOW}" transform="translate({x:.2f},{y3:.2f})" d="{geo}"/>'
+    out += f'<path fill="{WHITE}" transform="translate({x:.2f},{y3:.2f})" d="{geo1}"/>'
+    out += f'<path fill="{GREEN}" transform="translate({x+g2x:.2f},{y3:.2f})" d="{geo2}"/>'
     out += f'<path fill="{WHITE}" transform="translate({x:.2f},{y4:.2f})" d="{tag}"/>'
     return out, tw, y4 - y
 
