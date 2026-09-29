@@ -50,10 +50,33 @@ def cover_photo(src, out):
     d.text((282, H - 70), "PARKET LUX", font=ImageFont.truetype(LAT, 40), fill=(255, 255, 255))
     c.save(out, quality=90)
 
+def offer(src, out):
+    W = H = 1080
+    c = cover(Image.open(IMG + src), W, H).filter(ImageFilter.GaussianBlur(3))
+    shade = gradient(W, H, GREEN, DGREEN).convert("RGBA"); shade.putalpha(175)
+    c = c.convert("RGBA"); c.alpha_composite(shade); c = c.convert("RGB")
+    d = ImageDraw.Draw(c)
+    d.rounded_rectangle((30, 30, W - 30, H - 30), 30, outline=GOLD, width=6)
+    bg = badge(250); c.paste(bg, ((W - 250) // 2, 70), bg)
+    f = lambda n: ImageFont.truetype(GEO, n)
+    ctext(d, W/2, 360, "გთავაზობთ", f(52), (255, 255, 255))
+    ctext(d, W/2, 430, "იატაკის განახლებას", f(72), LGOLD)
+    ctext(d, W/2, 530, "გერმანული აპარატებით და ლაქებით", f(44), (255, 255, 255))
+    d.line((200, 620, W - 200, 620), fill=GOLD, width=3)
+    ctext(d, W/2, 650, "სრული ხარჯი", f(46), (255, 255, 255))
+    d.rounded_rectangle((200, 730, W - 200, 900), 40, fill=GOLD)
+    n, r = ImageFont.truetype(LAT, 96), f(100)
+    wn, wr = d.textlength("30 ", font=n), d.textlength("₾-დან", font=r)
+    x = W/2 - (wn + wr)/2
+    d.text((x, 752), "30 ", font=n, fill=DGREEN); d.text((x + wn, 735), "₾-დან", font=r, fill=DGREEN)
+    ctext(d, W/2, 915, "კვადრატულ მეტრზე", f(48), LGOLD)
+    c.save(out, quality=90)
+
 if __name__ == "__main__":
     before_after("3.jpg", "2.jpg", "before-after-1.jpg")
     before_after("4.webp", "5.jpg", "before-after-2.jpg")
     cover_photo("5.jpg", "cover.jpg")
+    offer("5.jpg", "offer-30.jpg")
     before_after("6.webp", "7.webp", "before-after-3.jpg", "მხატვრული პარკეტის ციკლოვკა")
     before_after("8.webp", "9.webp", "before-after-4.jpg", "ფიცრის იატაკის ციკლოვკა და ლაქირება")
     before_after("11.webp", "10.webp", "before-after-5.jpg", "პარკეტის უმტვერო ციკლოვკა")
