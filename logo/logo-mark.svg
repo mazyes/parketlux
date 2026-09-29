@@ -1,4 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
 <rect width="240" height="240" fill="#fff"/>
-<g transform="translate(120,120)"><polygon fill="#CDAE84" stroke="#fff" stroke-width="5" stroke-linejoin="round" points="-53.69,-31.00 0.00,-62.00 53.69,-31.00 0.00,0.00"/><line x1="-35.80" y1="-20.67" x2="17.90" y2="-51.67" stroke="#fff" stroke-width="2.5"/><line x1="-17.90" y1="-10.33" x2="35.80" y2="-41.33" stroke="#fff" stroke-width="2.5"/><polygon fill="#26221F" stroke="#fff" stroke-width="5" stroke-linejoin="round" points="0.00,0.00 53.69,-31.00 53.69,31.00 0.00,62.00"/><line x1="0.00" y1="20.67" x2="53.69" y2="-10.33" stroke="#fff" stroke-width="2.5"/><line x1="0.00" y1="41.33" x2="53.69" y2="10.33" stroke="#fff" stroke-width="2.5"/><polygon fill="#5B3820" stroke="#fff" stroke-width="5" stroke-linejoin="round" points="-53.69,31.00 -53.69,-31.00 0.00,0.00 0.00,62.00"/><line x1="-35.80" y1="41.33" x2="-35.80" y2="-20.67" stroke="#fff" stroke-width="2.5"/><line x1="-17.90" y1="51.67" x2="-17.90" y2="-10.33" stroke="#fff" stroke-width="2.5"/><path d="M41.00,-71.01 A82,82 0 1 1 -71.01,-41.00" fill="none" stroke="#B8923E" stroke-width="5" stroke-linecap="round"/></g>
+<g transform="translate(20,35)">
+  <clipPath id="floor"><rect x="0" y="152" width="200" height="18" rx="3"/></clipPath>
+  <g clip-path="url(#floor)"><polygon fill="#5B3820" points="-16,152 5,152 -3,170 -24,170"/><polygon fill="#5B3820" points="8,152 29,152 21,170 0,170"/><polygon fill="#5B3820" points="32,152 53,152 45,170 24,170"/><polygon fill="#5B3820" points="56,152 77,152 69,170 48,170"/><polygon fill="#CDAE84" points="80,152 101,152 93,170 72,170"/><polygon fill="#CDAE84" points="104,152 125,152 117,170 96,170"/><polygon fill="#CDAE84" points="128,152 149,152 141,170 120,170"/><polygon fill="#CDAE84" points="152,152 173,152 165,170 144,170"/><polygon fill="#CDAE84" points="176,152 197,152 189,170 168,170"/><polygon fill="#CDAE84" points="200,152 221,152 213,170 192,170"/><polygon fill="#CDAE84" points="224,152 245,152 237,170 216,170"/></g>
+  <path d="M78,44 C52,44 32,58 38,78 C41,88 46,92 50,96" fill="none" stroke="#CDAE84" stroke-width="8" stroke-linecap="round"/>
+  <line x1="120" y1="118" x2="146" y2="30" stroke="#2E6B45" stroke-width="8" stroke-linecap="round"/>
+  <line x1="134" y1="26" x2="170" y2="18" stroke="#26221F" stroke-width="8" stroke-linecap="round"/>
+  <rect x="78" y="46" width="36" height="72" rx="5" fill="#CDAE84"/>
+  <rect x="78" y="70" width="36" height="3" fill="#fff"/>
+  <rect x="78" y="94" width="36" height="3" fill="#fff"/>
+  <rect x="74" y="34" width="44" height="14" rx="5" fill="#26221F"/>
+  <rect x="40" y="92" width="34" height="28" rx="5" fill="#2E6B45"/>
+  <rect x="28" y="118" width="108" height="10" rx="3" fill="#2E6B45"/>
+  <rect x="22" y="128" width="120" height="18" rx="9" fill="#26221F"/>
+  <path d="M8,124 A30,30 0 0 0 8,150" fill="none" stroke="#B8923E" stroke-width="4" stroke-linecap="round"/>
+  <path d="M-4,118 A40,40 0 0 0 -4,156" fill="none" stroke="#B8923E" stroke-width="4" stroke-linecap="round" opacity=".55"/>
+</g>
 </svg>

@@ -6,6 +6,7 @@ from fontTools.pens.transformPen import TransformPen
 
 FONTS = sys.argv[1] if len(sys.argv) > 1 else "."
 BROWN, CHAR, BEIGE, GOLD = "#5B3820", "#26221F", "#CDAE84", "#B8923E"
+GREEN = "#2E6B45"
 
 def text_path(font_file, text, size, x, y, tracking=0.0):
     f = TTFont(font_file)
@@ -19,25 +20,29 @@ def text_path(font_file, text, size, x, y, tracking=0.0):
         cx += hmtx[g][0] * s + tracking * size
     return pen.getCommands(), cx - tracking * size
 
-def mark(cx, cy, R=62):
-    """Three-rhombus hexagon parquet (as laid on site) inside a sanding-disc arc."""
-    import math
-    k = math.sqrt(3) / 2
-    T, UR, LR, B, LL, UL, C = (0, -R), (k*R, -R/2), (k*R, R/2), (0, R), (-k*R, R/2), (-k*R, -R/2), (0, 0)
-    def lerp(a, b, t): return (a[0] + (b[0]-a[0])*t, a[1] + (b[1]-a[1])*t)
-    def pts(*ps): return " ".join(f"{x:.2f},{y:.2f}" for x, y in ps)
-    out = []
-    # rhombus (p0,p1,p2,p3); plank seams run parallel to p0->p1
-    for (p0, p1, p2, p3), col in (((UL, T, UR, C), BEIGE), ((C, UR, LR, B), CHAR), ((LL, UL, C, B), BROWN)):
-        out.append(f'<polygon fill="{col}" stroke="#fff" stroke-width="5" stroke-linejoin="round" points="{pts(p0, p1, p2, p3)}"/>')
-        for t in (1/3, 2/3):
-            a, b = lerp(p0, p3, t), lerp(p1, p2, t)
-            out.append(f'<line x1="{a[0]:.2f}" y1="{a[1]:.2f}" x2="{b[0]:.2f}" y2="{b[1]:.2f}" stroke="#fff" stroke-width="2.5"/>')
-    r = R + 20
-    a0, a1 = math.radians(-60), math.radians(210)
-    x0, y0, x1, y1 = r*math.cos(a0), r*math.sin(a0), r*math.cos(a1), r*math.sin(a1)
-    out.append(f'<path d="M{x0:.2f},{y0:.2f} A{r},{r} 0 1 1 {x1:.2f},{y1:.2f}" fill="none" stroke="{GOLD}" stroke-width="5" stroke-linecap="round"/>')
-    return f'<g transform="translate({cx},{cy})">' + "".join(out) + '</g>'
+def mark(cx, cy):
+    """Rotary floor sander on a parquet strip: worn planks ahead, restored planks behind. Box 200x170."""
+    floor = []
+    for i in range(-1, 10):
+        x = i * 24
+        col = BROWN if x + 10 < 64 else BEIGE
+        floor.append(f'<polygon fill="{col}" points="{x+8},152 {x+29},152 {x+21},170 {x},170"/>')
+    return f'''<g transform="translate({cx-100},{cy-85})">
+  <clipPath id="floor"><rect x="0" y="152" width="200" height="18" rx="3"/></clipPath>
+  <g clip-path="url(#floor)">{"".join(floor)}</g>
+  <path d="M78,44 C52,44 32,58 38,78 C41,88 46,92 50,96" fill="none" stroke="{BEIGE}" stroke-width="8" stroke-linecap="round"/>
+  <line x1="120" y1="118" x2="146" y2="30" stroke="{GREEN}" stroke-width="8" stroke-linecap="round"/>
+  <line x1="134" y1="26" x2="170" y2="18" stroke="{CHAR}" stroke-width="8" stroke-linecap="round"/>
+  <rect x="78" y="46" width="36" height="72" rx="5" fill="{BEIGE}"/>
+  <rect x="78" y="70" width="36" height="3" fill="#fff"/>
+  <rect x="78" y="94" width="36" height="3" fill="#fff"/>
+  <rect x="74" y="34" width="44" height="14" rx="5" fill="{CHAR}"/>
+  <rect x="40" y="92" width="34" height="28" rx="5" fill="{GREEN}"/>
+  <rect x="28" y="118" width="108" height="10" rx="3" fill="{GREEN}"/>
+  <rect x="22" y="128" width="120" height="18" rx="9" fill="{CHAR}"/>
+  <path d="M8,124 A30,30 0 0 0 8,150" fill="none" stroke="{GOLD}" stroke-width="4" stroke-linecap="round"/>
+  <path d="M-4,118 A40,40 0 0 0 -4,156" fill="none" stroke="{GOLD}" stroke-width="4" stroke-linecap="round" opacity=".55"/>
+</g>'''
 
 def svg(w, h, body):
     return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">\n<rect width="{w}" height="{h}" fill="#fff"/>\n{body}\n</svg>\n'
@@ -50,12 +55,14 @@ lux, lw = text_path(M7, "LUX", 64, 0, 0, 0.06)
 geo, gw = text_path(G6, "პარკეტ ლუქსი", 25, 0, 0, 0.12)
 gap = 20
 tw = pw + gap + lw
-tx, W, H = 240, 240 + tw + 60, 240
-body = mark(122, 120)
+tag, tgw = text_path(G6, "პარკეტის ხეხვა და აღდგენა", 16, 0, 0, 0.1)
+tx, W, H = 290, 290 + tw + 60, 260
+body = mark(150, 130)
 body += f'<path fill="{CHAR}" transform="translate({tx},128)" d="{parket}"/>'
 body += f'<path fill="{BROWN}" transform="translate({tx+pw+gap},128)" d="{lux}"/>'
 body += f'<rect x="{tx}" y="148" width="{tw}" height="2" fill="{GOLD}"/>'
 body += f'<path fill="{BROWN}" transform="translate({tx+(tw-gw)/2},188)" d="{geo}"/>'
+body += f'<path fill="{GREEN}" transform="translate({tx+(tw-tgw)/2},222)" d="{tag}"/>'
 open("logo-horizontal.svg", "w").write(svg(round(W), H, body))
 
 # Stacked / square (profile picture)
@@ -63,13 +70,15 @@ S = 600
 parket, pw = text_path(M7, "PARKET", 58, 0, 0, 0.06)
 lux, lw = text_path(M7, "LUX", 58, 0, 0, 0.06)
 geo, gw = text_path(G6, "პარკეტ ლუქსი", 24, 0, 0, 0.12)
+tag, tgw = text_path(G6, "პარკეტის ხეხვა და აღდგენა", 16, 0, 0, 0.1)
 tw = pw + 18 + lw
 tx = (S - tw) / 2
-body = mark(S / 2, 222)
-body += f'<path fill="{CHAR}" transform="translate({tx},384)" d="{parket}"/>'
-body += f'<path fill="{BROWN}" transform="translate({tx+pw+18},384)" d="{lux}"/>'
-body += f'<rect x="{tx}" y="404" width="{tw}" height="2" fill="{GOLD}"/>'
-body += f'<path fill="{BROWN}" transform="translate({(S-gw)/2},444)" d="{geo}"/>'
+body = mark(S / 2, 196)
+body += f'<path fill="{CHAR}" transform="translate({tx},358)" d="{parket}"/>'
+body += f'<path fill="{BROWN}" transform="translate({tx+pw+18},358)" d="{lux}"/>'
+body += f'<rect x="{tx}" y="378" width="{tw}" height="2" fill="{GOLD}"/>'
+body += f'<path fill="{BROWN}" transform="translate({(S-gw)/2},418)" d="{geo}"/>'
+body += f'<path fill="{GREEN}" transform="translate({(S-tgw)/2},456)" d="{tag}"/>'
 open("logo-stacked.svg", "w").write(svg(S, S, body))
 
 # Symbol only
