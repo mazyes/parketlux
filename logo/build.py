@@ -106,7 +106,7 @@ def svg(w, h, body):
 
 
 LAT, GEO_B, GEO_M = f"{FONTS}/fira800.woff", f"{FONTS}/geo800.ttf", f"{FONTS}/geo700.ttf"
-NAME_KA, TAG_KA = mtavruli("პარკეტ ლუქსი"), mtavruli("პარკეტის ხეხვა და აღდგენა")
+NAME_KA, TAG_KA = mtavruli("პარკეტ ლუქსი"), mtavruli("პარკეტის მოხვეწა და აღდგენა")
 
 
 def wordmark(x, y, size, rule_above=False):
