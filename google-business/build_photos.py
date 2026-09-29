@@ -56,3 +56,4 @@ if __name__ == "__main__":
     cover_photo("5.jpg", "cover.jpg")
     before_after("6.webp", "7.webp", "before-after-3.jpg", "მხატვრული პარკეტის ციკლოვკა")
     before_after("8.webp", "9.webp", "before-after-4.jpg", "ფიცრის იატაკის ციკლოვკა და ლაქირება")
+    before_after("11.webp", "10.webp", "before-after-5.jpg", "პარკეტის უმტვერო ციკლოვკა")
