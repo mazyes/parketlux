@@ -109,7 +109,7 @@ LAT, GEO_B, GEO_M = f"{FONTS}/fira800.woff", f"{FONTS}/geo800.ttf", f"{FONTS}/ge
 NAME_KA, TAG_KA = mtavruli("პარკეტ ლუქსი"), mtavruli("პარკეტის ხეხვა და აღდგენა")
 
 
-def wordmark(x, y, size):
+def wordmark(x, y, size, rule_above=False):
     """PARKET LUX / rule / big Georgian name / tagline, all set to the same width. Returns (svg, width, height)."""
     parket, pw = text_path(LAT, "PARKET", size, 0.05)
     lux, lw = text_path(LAT, "LUX", size, 0.05)
@@ -118,15 +118,20 @@ def wordmark(x, y, size):
     geo, _ = fit_path(GEO_B, NAME_KA, tw, 0.06)
     tag, _ = fit_path(GEO_M, TAG_KA, tw, 0.12)
     cap = size * 0.7
-    y1 = y + cap
-    y2 = y1 + size * 0.28
-    y3 = y2 + size * 0.2 + size * 0.62
+    if rule_above:
+        y2 = y
+        y1 = y + size * 0.4 + cap
+        y3 = y1 + size * 0.3 + size * 0.62
+    else:
+        y1 = y + cap
+        y2 = y1 + size * 0.28
+        y3 = y2 + size * 0.2 + size * 0.62
     y4 = y3 + size * 0.5
     out = f'<path fill="{WHITE}" transform="translate({x:.2f},{y1:.2f})" d="{parket}"/>'
     out += f'<path fill="{GREEN}" transform="translate({x+pw+gap:.2f},{y1:.2f})" d="{lux}"/>'
     out += f'<rect x="{x:.2f}" y="{y2:.2f}" width="{tw:.2f}" height="{size*0.045:.2f}" fill="{YELLOW}"/>'
     out += f'<path fill="{YELLOW}" transform="translate({x:.2f},{y3:.2f})" d="{geo}"/>'
-    out += f'<path fill="{SILVER}" transform="translate({x:.2f},{y4:.2f})" d="{tag}"/>'
+    out += f'<path fill="{WHITE}" transform="translate({x:.2f},{y4:.2f})" d="{tag}"/>'
     return out, tw, y4 - y
 
 
@@ -139,10 +144,10 @@ open("logo-horizontal.svg", "w").write(svg(round(260 + tw + 60), H, body))
 
 # Stacked / square (profile picture)
 S = 600
-_, tw, th = wordmark(0, 0, 58)
-top = (S - (245 + 36 + th)) / 2
+_, tw, th = wordmark(0, 0, 58, True)
+top = (S - (245 + 20 + th)) / 2
 body = mark(S / 2, top + 122)
-wm, tw, th = wordmark((S - tw) / 2, top + 281, 58)
+wm, tw, th = wordmark((S - tw) / 2, top + 265, 58, True)
 open("logo-stacked.svg", "w").write(svg(S, S, body + wm))
 
 # Symbol only
