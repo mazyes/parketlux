@@ -37,7 +37,7 @@ def before_after(bf, af, out, title="პარკეტის ციკლოვ
         tw = d.textlength(lab, font=lf); px, py = x + pw/2 - tw/2 - 34, y + ph - 100
         d.rounded_rectangle((px, py, px + tw + 68, py + 76), 38, fill=DGREEN if i == 0 else GOLD, outline=GOLD, width=4)
         d.text((px + 34, py + 6), lab, font=lf, fill=LGOLD if i == 0 else DGREEN)
-    ctext(d, W/2, H - FT + 28, "PARKET LUX  •  +995 558 61 11 62", ImageFont.truetype(LAT, 46), LGOLD)
+    ctext(d, W/2, H - FT + 28, "PARKET LUX", ImageFont.truetype(LAT, 46), LGOLD)
     c.save(out, quality=90)
 
 def cover_photo(src, out):
@@ -47,7 +47,7 @@ def cover_photo(src, out):
     d = ImageDraw.Draw(c); d.line((0, H - 170, W, H - 170), fill=GOLD, width=5)
     bg = badge(210); c.paste(bg, (40, H - 245), bg)
     d.text((280, H - 150), "პარკეტის ციკლოვკა და ლაქირება", font=ImageFont.truetype(GEO, 56), fill=LGOLD)
-    d.text((282, H - 70), "PARKET LUX  •  +995 558 61 11 62", font=ImageFont.truetype(LAT, 40), fill=(255, 255, 255))
+    d.text((282, H - 70), "PARKET LUX", font=ImageFont.truetype(LAT, 40), fill=(255, 255, 255))
     c.save(out, quality=90)
 
 if __name__ == "__main__":
