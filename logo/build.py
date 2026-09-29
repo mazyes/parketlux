@@ -83,8 +83,13 @@ def mark(cx, cy, R=80):
   <path d="M-6,-104 Q-4,-108 3,-108" fill="none" stroke="{HL}" stroke-width="1.4" stroke-linecap="round"/>
   <rect x="1" y="-116" width="4" height="7" rx="1" fill="{SILVER}"/>
   <rect x="-1" y="-117" width="8" height="2.5" rx="1" fill="{SILVER}"/>
-  <path d="M-12,-47 H26" stroke="{GREEN}" stroke-width="4.5" stroke-linecap="round"/>
-  <path d="M20,-47 L27,-58" stroke="{GREEN}" stroke-width="3" stroke-linecap="round"/>
+  <path d="M-13,-47 H24 M11,-47 L28.1,-62" fill="none" stroke="{BG}" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M-13,-47 H24 M11,-47 L28.1,-62" fill="none" stroke="{GREEN}" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M-12,-45.4 H22" stroke="{DG}" stroke-width="1.2" stroke-linecap="round"/>
+  <rect x="21" y="-52" width="10" height="10" rx="2.5" fill="{GREEN}" stroke="{BG}" stroke-width="1.5"/>
+  <circle cx="26" cy="-47" r="1.5" fill="{SILVER}"/>
+  <rect x="24.6" y="-65" width="7" height="6" rx="1.5" fill="{GREEN}" stroke="{BG}" stroke-width="1.5" transform="rotate(7.6 28.1 -62)"/>
+  <circle cx="28.1" cy="-62" r="1.1" fill="{SILVER}"/>
   <rect x="-38" y="-58" width="24" height="15" rx="2.5" fill="{GREEN}"/>
   <rect x="-35.5" y="-55.5" width="9" height="8" rx="1" fill="{WHITE}" stroke="{DARK}" stroke-width="1.2"/>
   <path d="M-34,-50 L-29.5,-53.5" stroke="{DARK}" stroke-width=".9" stroke-linecap="round"/>
