@@ -82,3 +82,4 @@ if __name__ == "__main__":
     before_after("6.webp", "7.webp", "before-after-3.jpg", "მხატვრული პარკეტის ციკლოვკა")
     before_after("8.webp", "9.webp", "before-after-4.jpg", "ფიცრის იატაკის ციკლოვკა და ლაქირება")
     before_after("11.webp", "10.webp", "before-after-5.jpg", "პარკეტის უმტვერო ციკლოვკა")
+    before_after("17.webp", "18.webp", "before-after-6.jpg", "ფიცრის იატაკი ახალივით")
