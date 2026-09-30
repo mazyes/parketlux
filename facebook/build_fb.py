@@ -8,8 +8,7 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 IMG = sys.argv[1] if len(sys.argv) > 1 else "."
-GEO = os.path.join(HERE, "fonts/NotoSerifGeorgian-Black.ttf")
-LAT = os.path.join(HERE, "fonts/Cinzel.ttf")
+FONT = os.path.join(HERE, "fonts/FiraGO-ExtraBold.ttf")
 OUT = os.path.join(HERE, "posts")
 W, H = 1080, 1350
 DGREEN, GREEN = (6, 40, 18), (16, 86, 40)
@@ -17,23 +16,8 @@ GOLD_STOPS = [(255, 243, 176), (240, 196, 70), (178, 118, 16), (236, 190, 72), (
 WHITE, INK = (255, 255, 255), (8, 44, 20)
 
 
-def font(path, size):
-    f = ImageFont.truetype(path, size)
-    if path == LAT:
-        f.set_variation_by_name("Black")
-    return f
-
-
 def runs(text, size):
-    """Split text into (chunk, font) runs: Georgian letters and ₾ use Noto Serif Georgian, the rest Cinzel."""
-    out = []
-    for ch in text:
-        f = GEO if "\u10a0" <= ch <= "\u10ff" or ch in "₾ -" else LAT
-        if out and out[-1][1] == f:
-            out[-1][0] += ch
-        else:
-            out.append([ch, f])
-    return [(t, font(f, size)) for t, f in out]
+    return [(text, ImageFont.truetype(FONT, size))]
 
 
 def text_mask(text, size):
@@ -179,25 +163,30 @@ def offer(bg, out):
     c.convert("RGB").save(os.path.join(OUT, out), quality=92)
 
 
-def why_us(bg, out):
+def why_us(bg, out, focus=(60, 170, 1020, 1010)):
     c = background()
-    im = ImageOps.fit(Image.open(os.path.join(IMG, bg)).convert("RGB"), (W - 72, 560), Image.LANCZOS, centering=(0.5, 0.6))
-    c.paste(im, (36, 36))
-    gold_bar(c, (36, 36, W - 36, 596), 6)
-    c.alpha_composite(logo(220), ((W - 220) // 2, 480))
-    draw_text(c, W / 2, 725, "რატომ Parket Lux?", 60)
+    pw, ph = W - 72, 600
+    src = Image.open(os.path.join(IMG, bg)).convert("RGB")
+    blur = ImageOps.fit(src, (pw, ph), Image.LANCZOS).filter(ImageFilter.GaussianBlur(18))
+    c.paste(blur, (36, 36))
+    sub = src.crop(focus)
+    sub = sub.resize((int(sub.width * ph / sub.height), ph), Image.LANCZOS)
+    c.paste(sub, (36 + (pw - sub.width) // 2, 36))
+    gold_bar(c, (36, 36, W - 36, 36 + ph), 6)
+    c.alpha_composite(logo(200), ((W - 200) // 2, 540))
+    draw_text(c, W / 2, 760, "რატომ Parket Lux?", 60)
     items = ["გერმანული აპარატი — უმტვერო ციკლოვკა", "ევროპული ლაქი — პრიალა ან მატოვი",
              "2006 წლიდან — 20 წლის გამოცდილება", "მთელ თბილისში და შემოგარენში"]
-    for i, t in enumerate(items):
-        y = 830 + i * 72
-        c.alpha_composite(vgradient(18, 18, GOLD_STOPS).convert("RGBA"), (110, y + 14))
-        m = text_mask(t, 34)
+    masks = [text_mask(t, 34) for t in items]
+    x0 = (W - (max(m.width for m in masks) + 40)) // 2
+    for i, m in enumerate(masks):
+        y = 860 + i * 66
+        c.alpha_composite(vgradient(18, 18, GOLD_STOPS).convert("RGBA"), (x0, y + m.height // 2 - 9))
         layer = Image.new("RGBA", m.size, WHITE)
         layer.putalpha(m)
-        c.alpha_composite(layer, (150, y))
+        c.alpha_composite(layer, (x0 + 40, y))
     footer(c)
     c.convert("RGB").save(os.path.join(OUT, out), quality=92)
-
 
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
