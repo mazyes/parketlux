@@ -17,9 +17,7 @@ from PIL import Image, ImageDraw, ImageFilter, ImageOps
 import build_fb as fb
 
 W, H, FPS = 1080, 1920, 30
-VIDEO, PHOTOS, OUTFILE = sys.argv[1], sys.argv[2], sys.argv[3]
-MUSIC = sys.argv[4] if len(sys.argv) > 4 else None
-TMP = os.path.join(os.path.dirname(os.path.abspath(OUTFILE)), "reel_tmp")
+TMP = "reel_tmp"
 FFMPEG = imageio_ffmpeg.get_ffmpeg_exe()
 T_IN, T_RES, T_OUT, XF = 3.5, 4.5, 4.5, 0.6
 
@@ -204,6 +202,9 @@ def run(args):
 
 
 if __name__ == "__main__":
+    VIDEO, PHOTOS, OUTFILE = sys.argv[1], sys.argv[2], sys.argv[3]
+    MUSIC = sys.argv[4] if len(sys.argv) > 4 else None
+    TMP = os.path.join(os.path.dirname(os.path.abspath(OUTFILE)), "reel_tmp")
     os.makedirs(TMP, exist_ok=True)
     frame = os.path.join(TMP, "frame.jpg")
     run(["-ss", "5", "-i", VIDEO, "-frames:v", "1", frame])
