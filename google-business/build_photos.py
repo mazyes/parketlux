@@ -20,7 +20,7 @@ def gradient(w, h, a, b):
         t = y / h; d.line((0, y, w, y), fill=tuple(int(a[i]*(1-t)+b[i]*t) for i in range(3)))
     return g
 
-def before_after(bf, af, out, title="პარკეტის ციკლოვკა და ლაქირება"):
+def before_after(bf, af, out, title="პარკეტის ციკლოვკა და ლაქირება", footer="PARKET LUX"):
     W, H, HD, FT = 1600, 1200, 150, 110
     c = Image.new("RGB", (W, H)); c.paste(gradient(W, H, GREEN, DGREEN))
     d = ImageDraw.Draw(c)
@@ -37,7 +37,7 @@ def before_after(bf, af, out, title="პარკეტის ციკლოვ
         tw = d.textlength(lab, font=lf); px, py = x + pw/2 - tw/2 - 34, y + ph - 100
         d.rounded_rectangle((px, py, px + tw + 68, py + 76), 38, fill=DGREEN if i == 0 else GOLD, outline=GOLD, width=4)
         d.text((px + 34, py + 6), lab, font=lf, fill=LGOLD if i == 0 else DGREEN)
-    ctext(d, W/2, H - FT + 28, "PARKET LUX", ImageFont.truetype(LAT, 46), LGOLD)
+    ctext(d, W/2, H - FT + 28, footer, ImageFont.truetype(LAT, 46), LGOLD)
     c.save(out, quality=90)
 
 def cover_photo(src, out):
@@ -50,7 +50,7 @@ def cover_photo(src, out):
     d.text((282, H - 70), "PARKET LUX", font=ImageFont.truetype(LAT, 40), fill=(255, 255, 255))
     c.save(out, quality=90)
 
-def offer(src, out):
+def offer(src, out, phone=None):
     W = H = 1080
     c = cover(Image.open(IMG + src), W, H).filter(ImageFilter.GaussianBlur(3))
     shade = gradient(W, H, GREEN, DGREEN).convert("RGBA"); shade.putalpha(175)
@@ -70,6 +70,8 @@ def offer(src, out):
     x = W/2 - (wn + wr)/2
     d.text((x, 752), "30 ", font=n, fill=DGREEN); d.text((x + wn, 735), "₾-დან", font=r, fill=DGREEN)
     ctext(d, W/2, 915, "კვადრატულ მეტრზე", f(48), LGOLD)
+    if phone:
+        ctext(d, W/2, 985, phone, ImageFont.truetype(LAT, 36), (255, 255, 255))
     c.save(out, quality=90)
 
 if __name__ == "__main__":
